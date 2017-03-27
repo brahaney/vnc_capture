@@ -11,7 +11,7 @@ function wait_for_service {
 
     echo "Waiting for service at ${1}:${2}..."
 
-    until $(nc -z ${HOST} ${PORT}); do
+    until $(nc ${1} ${2}); do
         if [[ ${COUNTER} -gt ${TIMEOUT} ]]; then
             (>&2 echo "TIMEOUT waiting for ${1}:${2}")
             exit 1
@@ -23,4 +23,7 @@ function wait_for_service {
     echo "service at ${1}:${2} ready after ${COUNTER} seconds."
 }
 
+echo ${VNC_PASSWORD} > .secret
 wait_for_service ${HOST} ${PORT}
+cd /data
+flvrec.py -o vnc_recording.flv -P /.secret ${HOST} ${PORT}
