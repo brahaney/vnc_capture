@@ -12,7 +12,7 @@ services:
     image: selenium/standalone-chrome-debug
 
   vnc_capture:
-    image: vnc_capture
+    image: brahaney/vnc_capture
     command: "chrome 5900"
     volumes:
       - ./data/:/data

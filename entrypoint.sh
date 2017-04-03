@@ -1,11 +1,12 @@
 #!/bin/sh
 HOST=$1
 PORT=$2
+SLEEP=${3:-0.3}
 
 function wait_for_service {
     # :param $1: Hostname/IP/Socket
     # :param $2: Port
-    local SLEEP_VALUE=5
+    local SLEEP_VALUE=$3
     local TIMEOUT=7200
     local COUNTER=0
 
@@ -24,6 +25,6 @@ function wait_for_service {
 }
 
 echo ${VNC_PASSWORD} > .secret
-wait_for_service ${HOST} ${PORT}
+wait_for_service ${HOST} ${PORT} ${SLEEP}
 cd /data
 flvrec.py -o vnc_recording.flv -P /.secret ${HOST} ${PORT}
