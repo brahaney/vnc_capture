@@ -6,7 +6,7 @@ RUN apk add --no-cache python && \
     rm -r /usr/lib/python*/ensurepip && \
     pip install --upgrade pip setuptools && \
     rm -r /root/.cache
-RUN apk add --no-cache python-dev build-base linux-headers
+RUN apk add --no-cache python-dev build-base linux-headers bash bc
 RUN pip install vnc2flv
 
 ADD entrypoint.sh /entrypoint.sh
