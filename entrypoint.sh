@@ -1,7 +1,11 @@
 #!/bin/sh
 HOST=$1
 PORT=$2
-SLEEP=${3:-0.3}
+if [ -e ${3} ]; then
+    SLEEP=0.3;
+else
+    SLEEP=${3};
+fi
 
 function wait_for_service {
     # :param $1: Hostname/IP/Socket
